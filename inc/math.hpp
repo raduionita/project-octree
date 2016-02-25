@@ -1,6 +1,8 @@
 #ifndef __math_hpp__
 #define __math_hpp__
 
+#include <cmath>
+
 namespace math
 {
 #ifdef MATH_DOUBLE_PRECISION
@@ -13,33 +15,41 @@ namespace math
   typedef unsigned int   uint;
 }
 
-#include "math/CVector.hpp" // 
+#include "math/CVector.hpp"  // 
+#include "math/CMatrix.hpp"  // 
 
 namespace math
 {
-  typedef CVector3 vec3;
-  typedef CVector4 vec4;
-}
-
-#include "math/CPlane.hpp"  // requires CVector.hpp
-#include "math/CShape.hpp"  // requires CVector.hpp
-#include "math/CCube.hpp"   // requires CShape.hpp
-#include "math/CSphere.hpp" // requires CShape.hpp
-#include "math/CBox.hpp"    // requires CCube.hpp
-
-namespace math
-{
+  typedef CVector3   vec3;
+  typedef CVector4   vec4;
   
-  /**
-   * Compute Box volume
-   * @param  CBox& oBox
-   * @return math::real
-   */
-  inline math::real volume(const CBox& oBox)
+  typedef CMatrix4x4 mat4;
+  
+  vec3 cross(const vec3& lhs, const vec3& rhs)
   {
-    return oBox.mWidth * oBox.mHeight * oBox.mDepth;
+    vec3 res;
+    
+    return res;
   }
   
+  real dot(const vec3& lhs, const vec3& rhs)
+  {
+    real res = 0.0f;
+    
+    return res;
+  }
+}
+
+#include "math/CPlane.hpp"   // requires CVector.hpp
+#include "math/CFrustum.hpp" // requires CPlane.hpp
+
+#include "math/CShape.hpp"   // requires CVector.hpp
+#include "math/CCube.hpp"    // requires CShape.hpp
+#include "math/CSphere.hpp"  // requires CShape.hpp
+#include "math/CBox.hpp"     // requires CCube.hpp
+
+namespace math
+{
   /**
    * Split a CBox into 8 equal segments
    * @param  CBox& oAABB

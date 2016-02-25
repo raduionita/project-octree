@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="inc/math.hpp" />
+		<Unit filename="inc/math/CBox.hpp" />
+		<Unit filename="inc/math/CCube.hpp" />
+		<Unit filename="inc/math/CFrustum.hpp" />
+		<Unit filename="inc/math/CPlane.hpp" />
+		<Unit filename="inc/math/CShape.hpp" />
+		<Unit filename="inc/math/CSphere.hpp" />
+		<Unit filename="inc/math/CVector.hpp" />
+		<Unit filename="inc/tree.hpp" />
+		<Unit filename="inc/tree/COctree.hpp" />
+		<Unit filename="inc/util.hpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
