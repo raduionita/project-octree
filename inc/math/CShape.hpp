@@ -3,7 +3,7 @@
 
 namespace math
 {
-  class CShape
+  class CShape : public IShape
   {
     public:
     math::vec3 mPosition;

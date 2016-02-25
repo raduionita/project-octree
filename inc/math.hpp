@@ -40,13 +40,16 @@ namespace math
   }
 }
 
-#include "math/CPlane.hpp"   // requires CVector.hpp
-#include "math/CFrustum.hpp" // requires CPlane.hpp
+#include "math/IShape.hpp"    // 
+#include "math/CPlane.hpp"    // requires CVector.hpp
+#include "math/CTriangle.hpp" // requires CVector.hpp
+#include "math/CFrustum.hpp"  // requires CPlane.hpp
 
-#include "math/CShape.hpp"   // requires CVector.hpp
-#include "math/CCube.hpp"    // requires CShape.hpp
-#include "math/CSphere.hpp"  // requires CShape.hpp
-#include "math/CBox.hpp"     // requires CCube.hpp
+#include "math/CShape.hpp"    // requires CVector.hpp
+#include "math/CCube.hpp"     // requires CShape.hpp
+#include "math/CCone.hpp"     // requires CShape.hpp
+#include "math/CSphere.hpp"   // requires CShape.hpp
+#include "math/CBox.hpp"      // requires CCube.hpp
 
 namespace math
 {

@@ -54,14 +54,17 @@
 	"../inc/math.hpp"
 	"../inc/tree.hpp"
 
-1456435194 d:\workspace\cpp\opengl.octree\inc\math.hpp
+1456435980 d:\workspace\cpp\opengl.octree\inc\math.hpp
 	<cmath>
 	"math/CVector.hpp"
 	"math/CMatrix.hpp"
+	"math/IShape.hpp"
 	"math/CPlane.hpp"
+	"math/CTriangle.hpp"
 	"math/CFrustum.hpp"
 	"math/CShape.hpp"
 	"math/CCube.hpp"
+	"math/CCone.hpp"
 	"math/CSphere.hpp"
 	"math/CBox.hpp"
 
@@ -73,10 +76,10 @@
 1456418830 d:\workspace\cpp\opengl.octree\inc\math\cplane.hpp
 	<cassert>
 
-1456435299 d:\workspace\cpp\opengl.octree\inc\math\cfrustum.hpp
+1456435778 d:\workspace\cpp\opengl.octree\inc\math\cfrustum.hpp
 	<array>
 
-1456400408 d:\workspace\cpp\opengl.octree\inc\math\cshape.hpp
+1456435915 d:\workspace\cpp\opengl.octree\inc\math\cshape.hpp
 
 1456396066 d:\workspace\cpp\opengl.octree\inc\math\ccube.hpp
 
@@ -104,4 +107,12 @@
 	<vector>
 
 1456433233 d:\workspace\cpp\opengl.octree\inc\math\cmatrix.hpp
+
+1456436340 d:\workspace\cpp\opengl.octree\inc\math\ishape.hpp
+
+1456436142 d:\workspace\cpp\opengl.octree\inc\math\ctriangle.hpp
+	<array>
+	<cassert>
+
+1456436344 d:\workspace\cpp\opengl.octree\inc\math\ccone.hpp
 

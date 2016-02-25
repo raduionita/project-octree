@@ -5,7 +5,7 @@
 
 namespace math
 {
-  class CFrustum
+  class CFrustum : public IShape
   {
     typedef CPlane plane;
     
