@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1456405863 source:c:\workspace\cpp\opengl.octree\src\main.cpp
+	"../inc/math.hpp"
+	"../inc/tree.hpp"
+
+1456405807 c:\workspace\cpp\opengl.octree\inc\math.hpp
+	"math/CVector.hpp"
+	"math/CPlane.hpp"
+	"math/CShape.hpp"
+	"math/CCube.hpp"
+	"math/CSphere.hpp"
+	"math/CBox.hpp"
+
+1456405765 c:\workspace\cpp\opengl.octree\inc\math\cvector.hpp
+	<iostream>
+	<initializer_list>
+	<cassert>
+
+1456400873 c:\workspace\cpp\opengl.octree\inc\math\cplane.hpp
+
+1456400406 c:\workspace\cpp\opengl.octree\inc\math\cshape.hpp
+
+1456396064 c:\workspace\cpp\opengl.octree\inc\math\ccube.hpp
+
+1456400754 c:\workspace\cpp\opengl.octree\inc\math\csphere.hpp
+
+1456405830 c:\workspace\cpp\opengl.octree\inc\math\cbox.hpp
+	<iostream>
+	<array>
+
+1456405341 c:\workspace\cpp\opengl.octree\inc\tree.hpp
+	"tree/COctree.hpp"
+
+1456405849 c:\workspace\cpp\opengl.octree\inc\tree\coctree.hpp
+	<iostream>
+	<initializer_list>
+	<cassert>
+	<array>
+	<vector>
+	<exception>
+	<string>
+	"../math.hpp"
+	"../util.hpp"
+
+1456404945 c:\workspace\cpp\opengl.octree\inc\util.hpp
+	<vector>
+
