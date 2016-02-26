@@ -19,6 +19,13 @@ namespace math
     };
     
     public:
+    CVector3(const CVector3& that)
+    {
+      x = that.x;
+      y = that.y;
+      z = that.z;
+    }
+    
     CVector3(real fValue = 0.0f) : x(fValue), y(fValue), z(fValue) { }
     
     CVector3(real x, real y, real z) : x(x), y(y), z(z) { }
@@ -40,6 +47,17 @@ namespace math
       {
         // error
       }
+    }
+    
+    CVector3& operator = (const CVector3& that)
+    {
+      if(this != & that)
+      {
+        x = that.x;
+        y = that.y;
+        z = that.z;
+      }
+      return *this;
     }
     
     CVector3& operator = (std::initializer_list<real> list)
@@ -91,17 +109,17 @@ namespace math
     return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
   }
 
-  CVector3 operator * (const CVector3& lhs, real rhs)
+  inline CVector3 operator * (const CVector3& lhs, real rhs)
   {
     return CVector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
   }
   
-  CVector3 operator + (const CVector3& lhs, const CVector3& rhs)
+  inline CVector3 operator + (const CVector3& lhs, const CVector3& rhs)
   {
     return CVector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
   }
   
-  CVector3 operator - (const CVector3& lhs, const CVector3& rhs)
+  inline CVector3 operator - (const CVector3& lhs, const CVector3& rhs)
   {
     return CVector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
   }

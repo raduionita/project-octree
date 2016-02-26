@@ -87,12 +87,12 @@ namespace tree
     static unsigned int  sId;
     
     public:
-    unsigned int          mId;
-    CNode*                mParent;
-    std::array<CNode*, 8> mChildren; // 8 children
-    std::vector<CEntry*>  mEntries;  // data
-    math::CBox            mAABB;
-    bool                  mDirty;
+    unsigned int           mId;
+    CNode*                 mParent;
+    std::array<CNode*, 8u> mChildren; // 8 children
+    std::vector<CEntry*>   mEntries;  // data
+    math::CBox             mAABB;
+    bool                   mDirty;
     
     public:
     CNode(CNode* pParent, const math::CBox& oAABB = math::CBox(0.0f))
@@ -123,8 +123,13 @@ namespace tree
       }
     }
 
-    protected:
-    CNode*& getNode(size_t i)
+    public:
+    /**
+     * Get child node by index
+     * @param  ushort i
+     * @return CNode*   child ndoe
+     */ 
+    CNode* getNode(ushort i)
     {
       assert(i < 8);
       CNode*& pChild = mChildren[i];
@@ -133,20 +138,40 @@ namespace tree
       return pChild;
     }
     
-    public:
-    std::vector<CEntry*> getEntries()
+    /**
+     * Find node(child or this) by position inside this node
+     * @param  vec3&  vPosition
+     * @return CNode*           this or child
+     */
+    CNode* getNode(const math::vec3& vPosition)
+    {
+      // get node by position
+      if(vPosition == mAABB.mPosition)
+        return this;
+      //ushort i = (vPosition.x > mAABB.mPosition.x) ? 1 : 0, 
+      //       j = (vPosition.y > mAABB.mPosition.y) ? 1 : 0, 
+      //       k = (vPosition.z > mAABB.mPosition.z) ? 1 : 0;
+      return mChildren[(ushort)(vPosition.x > mAABB.mPosition.x) * 4 + // i * 2 * 2 +
+                       (ushort)(vPosition.y > mAABB.mPosition.y) * 2 + // j * 2 +
+                       (ushort)(vPosition.z > mAABB.mPosition.z)];     // k
+    }
+    
+    std::vector<CEntry*> getEntries(bool bRecursive = false)
     {
       std::vector<CEntry*> aTotal = mEntries;
-      for(size_t i = 0; i < 2; ++i) // x
-      for(size_t j = 0; j < 2; ++j) // y
-      for(size_t k = 0; k < 2; ++k) // z
+      if(bRecursive)
       {
-        size_t key = i * 2 * 2 + j * 2 + k;
-        CNode*& pChild = mChildren[key];
-        if(pChild != nullptr) 
+        for(size_t i = 0; i < 2; ++i) // x
+        for(size_t j = 0; j < 2; ++j) // y
+        for(size_t k = 0; k < 2; ++k) // z
         {
-          std::vector<CEntry*> aPart = pChild->getEntries();
-          util::merge(aTotal, aPart);
+          size_t key = i * 2 * 2 + j * 2 + k;
+          CNode*& pChild = mChildren[key];
+          if(pChild != nullptr) 
+          {
+            std::vector<CEntry*> aPart = pChild->getEntries(true);
+            util::merge(aTotal, aPart);
+          }
         }
       }
       return aTotal;
@@ -193,26 +218,18 @@ namespace tree
     
     void refresh()
     {
-      std::cout << "\t" << "CNode[" << mId << "]::refresh()" << std::endl;
-      std::vector<CEntry*> aEntries = getEntries();
-      clear();
-      for(size_t i = 0; i < aEntries.size(); ++i)
-      {
-        CEntry*& pEntry = aEntries[i];
-        _insert(this, pEntry);
-      }
+      _refresh(this);
     }
     
     void insert(CEntry* pEntry) throw(CException)
     {
       math::CBox oAABB = mAABB + pEntry->mAABB; // merge/expand AABB
-      //std::cout << "\t" << mAABB << "+" << pEntry->mAABB << "=" << oAABB << std::endl;
-      if(oAABB != mAABB && mAABB.getVolume() != 0.0f) // change in volume
+      if(oAABB != mAABB && mAABB.getVolume() != 0.0f) // change in volume & not empty
       {
         std::cout << "\t" << "CNode[" << mId << "]::insert(" << *pEntry << ") change" << std::endl;
         mEntries.push_back(pEntry);
         mAABB = oAABB;
-        refresh();
+        _refresh(this);
         // ? track back
       }
       else                                            // no change
@@ -232,8 +249,27 @@ namespace tree
     }
     
     protected:
+    static void _refresh(CNode* pNode)
+    {
+      std::cout << "\t" << "CNode[" << pNode->mId << "]::refresh()" << std::endl;
+      std::vector<CEntry*> aEntries = pNode->getEntries(true);
+      pNode->clear();
+      for(size_t i = 0; i < aEntries.size(); ++i)
+      {
+        CEntry*& pEntry = aEntries[i];
+        _insert(pNode, pEntry);
+      }
+    }
+    
     static void _insert(CNode* pNode, CEntry* pEntry)
     {
+      // @todo:
+      // get destination node by pEntry position
+      // if node == this/pNode
+      //   insert here/pNode/parent/this
+      // else
+      //   insert in node
+    
       if(pEntry->mAABB.mPosition == pNode->mAABB.mPosition) // entry at root
       {
         std::cout << "\t" << "CNode["<< pNode->mId <<"]::insert(" << *pEntry << ") insert:EQUAL" << std::endl;
@@ -241,13 +277,6 @@ namespace tree
       }
       else
       {
-        // @todo:
-        // check pEntry position against each AABB fragment
-        // if INSIDE fragment 
-        //   pChild->insert(pEntry)     // insert in child
-        // else if COLLIDE/INTERSECT w/ one of fragments
-        //   pNode->mEntries.push_back(pEntry) // insert here
-        
         std::array<math::CBox, 8> aAABBs = math::osplit(pNode->mAABB); // qslit, bsplit
         for(size_t i = 0; i < 2; ++i) // x
         for(size_t j = 0; j < 2; ++j) // y
@@ -256,7 +285,7 @@ namespace tree
           size_t key = i * 2 * 2 + j * 2 + k;
           math::CBox& oAABB = aAABBs[key];
           
-          if(math::isInside(pEntry->mAABB.mPosition, oAABB)) // if position in fragment box
+          if(math::inside(pEntry->mAABB.mPosition, oAABB)) // if position in fragment box
           {
             math::compare::result result = math::compare(pEntry->mAABB, oAABB);
             if(result == math::compare::COLLIDE)
@@ -287,7 +316,10 @@ namespace tree
     CNode* mRoot;
     
     public:
-    CTree() { }
+    CTree() : mRoot(nullptr) 
+    { 
+      
+    }
     
     virtual ~CTree()
     {
@@ -296,6 +328,11 @@ namespace tree
     }
     
     virtual void insert(CEntry*) = 0;
+    
+    CNode* getRoot() const
+    {
+      return mRoot;
+    }
   };
 
   class COcTree : public CTree
@@ -317,6 +354,79 @@ namespace tree
     {
       std::cout << "COcTree::insert(" << *pEntry << ")" << std::endl;
       mRoot->insert(pEntry);
+    }
+  
+    
+  };
+
+  class CResult
+  {
+    public:
+    void clear()
+    {
+    
+    }
+  };
+  
+  class CQuery
+  {
+    public:
+    enum EField
+    {
+      NODE,
+      ENTRY
+    };
+    
+    enum EComp
+    {
+      IN,
+      LESSER,
+      LEQUAL,
+      EQUAL,
+      GEQUAL,
+      GREATER
+    };
+
+    protected:
+    CResult mResult;
+    
+    public:
+    CQuery()
+    {
+      
+    }
+    
+    virtual ~CQuery()
+    {
+      
+    }
+    
+    public:
+    CQuery& select(EField field)
+    {
+      return *this;
+    }
+    
+    CQuery& from(const COcTree& oOcTree)
+    {
+      return from(oOcTree.getRoot());
+    }
+    
+    CQuery& from(const CNode& pNode)
+    {
+      return *this;
+    }
+    
+    CQuery& where(EField field, EComp comp, const math::CFrustum& frustum)
+    {
+      return *this;
+    }
+    
+    CResult& execute()
+    {
+      mResult.clear();
+      
+      return mResult;
     }
   };
 }

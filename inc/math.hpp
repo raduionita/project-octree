@@ -38,6 +38,19 @@ namespace math
     
     return res;
   }
+
+  real length(const vec3& v)
+  {
+    return std::sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
+  }
+  
+  vec3 normalize(const vec3& v)
+  {
+    real l = length(v);
+    if(l != 1.0f)
+      return vec3(v.x/l, v.y/l, v.z/l);
+    return vec3(v);
+  }
 }
 
 #include "math/IShape.hpp"    // 
@@ -84,7 +97,7 @@ namespace math
     return aAABB;
   }
   
-  bool isInside(const math::vec3& oPoint, const CBox& oBox)
+  bool inside(const math::vec3& oPoint, const CBox& oBox)
   {
     math::real fHalfWidth  = oBox.mWidth/2.0f;
     math::real fHalfHeight = oBox.mHeight/2.0f;
@@ -114,7 +127,7 @@ namespace math
       for(size_t i = 0; i < 8; ++i)
       {
         math::vec3& vertex = aSVertices[i];
-        if(isInside(vertex, bigger))
+        if(inside(vertex, bigger))
         {
           status |= 1 << i;
         }

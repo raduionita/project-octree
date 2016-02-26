@@ -3,7 +3,8 @@
 
 namespace tree
 {
-  
+  typedef unsigned short ushort;
+  typedef unsigned int   uint;
 }
 
 #include "tree/COctree.hpp"
