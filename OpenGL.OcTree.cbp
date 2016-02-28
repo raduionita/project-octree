@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="inc/app.hpp" />
+		<Unit filename="inc/core.hpp" />
 		<Unit filename="inc/math.hpp" />
 		<Unit filename="inc/math/CBox.hpp" />
 		<Unit filename="inc/math/CCone.hpp" />

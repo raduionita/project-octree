@@ -12,7 +12,7 @@ namespace math
     //       +---+
     //      / _ / |
     //      |   |/
-    //      +---+
+    //      +---+ 
     
     enum EPlanes 
     { 

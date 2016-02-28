@@ -2,70 +2,48 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="inc\math\CCone.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="inc\math.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="288" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="inc\math\CFrustum.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="137" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="inc\math\CPlane.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="827" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="11" />
-			<Collapse line="13" />
-			<Collapse line="29" />
-			<Collapse line="34" />
-			<Collapse line="39" />
-		</Folding>
-	</File>
-	<File name="inc\math\CShape.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="77" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="12" />
-		</Folding>
-	</File>
-	<File name="inc\tree\COctree.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2084" topLine="57" />
-		</Cursor>
-		<Folding>
-			<Collapse line="206" />
-			<Collapse line="210" />
-			<Collapse line="218" />
-		</Folding>
-	</File>
-	<File name="src\main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="567" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="12" />
-		</Folding>
-	</File>
-	<File name="inc\math.hpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1104" topLine="0" />
+			<Cursor1 position="335" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="6" />
 			<Collapse line="21" />
 			<Collapse line="28" />
 			<Collapse line="35" />
-			<Collapse line="55" />
-			<Collapse line="61" />
-			<Collapse line="72" />
-			<Collapse line="87" />
+			<Collapse line="42" />
+			<Collapse line="47" />
+			<Collapse line="67" />
+			<Collapse line="68" />
+			<Collapse line="74" />
+			<Collapse line="85" />
+			<Collapse line="100" />
+			<Collapse line="110" />
 			<Collapse line="114" />
-			<Collapse line="117" />
+			<Collapse line="127" />
+			<Collapse line="130" />
 		</Folding>
+	</File>
+	<File name="inc\math\CCone.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="288" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="inc\app.hpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="448" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="8" />
+			<Collapse line="32" />
+			<Collapse line="37" />
+			<Collapse line="42" />
+		</Folding>
+	</File>
+	<File name="inc\math\CTriangle.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="125" topLine="0" />
+		</Cursor>
 	</File>
 	<File name="inc\math\CVector.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -90,14 +68,101 @@
 			<Collapse line="120" />
 		</Folding>
 	</File>
-	<File name="inc\math\CTriangle.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="125" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="inc\math\IShape.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="109" topLine="0" />
 		</Cursor>
+	</File>
+	<File name="src\main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="637" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="18" />
+		</Folding>
+	</File>
+	<File name="inc\tree\COctree.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10969" topLine="228" />
+		</Cursor>
+		<Folding>
+			<Collapse line="17" />
+			<Collapse line="35" />
+			<Collapse line="38" />
+			<Collapse line="50" />
+			<Collapse line="98" />
+			<Collapse line="112" />
+			<Collapse line="126" />
+			<Collapse line="132" />
+			<Collapse line="140" />
+			<Collapse line="146" />
+			<Collapse line="163" />
+			<Collapse line="170" />
+			<Collapse line="341" />
+			<Collapse line="360" />
+			<Collapse line="366" />
+			<Collapse line="369" />
+			<Collapse line="375" />
+			<Collapse line="381" />
+			<Collapse line="387" />
+			<Collapse line="393" />
+			<Collapse line="396" />
+			<Collapse line="405" />
+			<Collapse line="411" />
+			<Collapse line="421" />
+			<Collapse line="431" />
+			<Collapse line="436" />
+			<Collapse line="442" />
+			<Collapse line="447" />
+			<Collapse line="452" />
+			<Collapse line="457" />
+			<Collapse line="462" />
+			<Collapse line="467" />
+		</Folding>
+	</File>
+	<File name="inc\math\CFrustum.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="254" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="17" />
+			<Collapse line="27" />
+			<Collapse line="43" />
+			<Collapse line="48" />
+			<Collapse line="69" />
+			<Collapse line="74" />
+			<Collapse line="81" />
+			<Collapse line="86" />
+			<Collapse line="101" />
+		</Folding>
+	</File>
+	<File name="inc\math\CPlane.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="827" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="11" />
+			<Collapse line="13" />
+			<Collapse line="29" />
+			<Collapse line="34" />
+			<Collapse line="39" />
+		</Folding>
+	</File>
+	<File name="inc\core.hpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="218" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="17" />
+			<Collapse line="26" />
+		</Folding>
+	</File>
+	<File name="inc\math\CShape.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="77" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="12" />
+		</Folding>
 	</File>
 </CodeBlocks_layout_file>

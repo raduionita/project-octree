@@ -9,16 +9,18 @@ int main()
   
   tree::COcTree* pOcTree = new tree::COcTree;
   
-  try 
+  try
   {
     pOcTree->insert(pEntry0);
-    pOcTree->insert(pEntry1);
     pOcTree->insert(pEntry2);
+    pOcTree->insert(pEntry1);
   } 
   catch (tree::COutOfBoundsException& e)
   {
     std::cout << e.what() << std::endl;
   }
+  
+  pOcTree->update();
   
   delete pOcTree;
   delete pEntry0;

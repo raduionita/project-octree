@@ -148,12 +148,23 @@ namespace tree
       // get node by position
       if(vPosition == mAABB.mPosition)
         return this;
+      else if(vPosition.x < mAABB.mPosition.x - mAABB.mWidth/2.0f  || mAABB.mPosition.x + mAABB.mWidth/2.0f  < vPosition.x
+           || vPosition.y < mAABB.mPosition.y - mAABB.mHeight/2.0f || mAABB.mPosition.y + mAABB.mHeight/2.0f < vPosition.y
+           || vPosition.z < mAABB.mPosition.z - mAABB.mDepth/2.0f  || mAABB.mPosition.z + mAABB.mDepth/2.0f  < vPosition.z)
+        return nullptr;
       //ushort i = (vPosition.x > mAABB.mPosition.x) ? 1 : 0, 
       //       j = (vPosition.y > mAABB.mPosition.y) ? 1 : 0, 
       //       k = (vPosition.z > mAABB.mPosition.z) ? 1 : 0;
       return mChildren[(ushort)(vPosition.x > mAABB.mPosition.x) * 4 + // i * 2 * 2 +
                        (ushort)(vPosition.y > mAABB.mPosition.y) * 2 + // j * 2 +
                        (ushort)(vPosition.z > mAABB.mPosition.z)];     // k
+    }
+    
+    CNode* getNodeRecursive(const math::vec3& vPosition)
+    {
+      // @todo
+      // recursive version of getNode(vec3)
+      return nullptr;
     }
     
     std::vector<CEntry*> getEntries(bool bRecursive = false)
@@ -206,6 +217,28 @@ namespace tree
         if(pChild != nullptr)
           pChild->update();
       }
+      
+      // @todo
+      // check all entries to see if there're still in this node
+      // an entry might have moved or changed its volume
+      for(size_t i = 0; i < mEntries.size(); ++i)
+      {
+        CEntry* pEntry = mEntries[i];
+        if(pEntry != nullptr)
+        {
+          // if pEntry insde this(node)
+          // && compare pEntry, this(node) == INSIDE
+          //   leave it here
+          // else
+          //   remove/pop pEntry from this(node)
+          //   mParent->insert(pEntry)
+          //
+        }
+      }
+      
+      
+      // @todo
+      // maybe the volume of the node has changed, and(probably) the volume of the parent
     }
     
     void resize()
@@ -224,15 +257,14 @@ namespace tree
     void insert(CEntry* pEntry) throw(CException)
     {
       math::CBox oAABB = mAABB + pEntry->mAABB; // merge/expand AABB
-      if(oAABB != mAABB && mAABB.getVolume() != 0.0f) // change in volume & not empty
+      if(oAABB != mAABB && mAABB.getVolume() != 0.0f) // change in volume && not empty
       {
         std::cout << "\t" << "CNode[" << mId << "]::insert(" << *pEntry << ") change" << std::endl;
         mEntries.push_back(pEntry);
         mAABB = oAABB;
         _refresh(this);
-        // ? track back
       }
-      else                                            // no change
+      else                                            // no change || empty
       {
         std::cout << "\t" << "CNode[" << mId << "]::insert(" << *pEntry << ") no change" << std::endl;
         mAABB = oAABB;
@@ -241,15 +273,10 @@ namespace tree
       
       // @todo:
       // if new AABB require moving entries from children nodes
-      
-      // @todo:
-      // mEntries.push_back(pEntry);                 // [1st] 
-      // for(size_t i = 0. i < mEntries.size(); ++i) // [2nd] 
-      //   CEntry*& pEntry = mEntries[i];
     }
     
     protected:
-    static void _refresh(CNode* pNode)
+    static void _refresh(CNode* pNode) throw(CException)
     {
       std::cout << "\t" << "CNode[" << pNode->mId << "]::refresh()" << std::endl;
       std::vector<CEntry*> aEntries = pNode->getEntries(true);
@@ -261,10 +288,11 @@ namespace tree
       }
     }
     
-    static void _insert(CNode* pNode, CEntry* pEntry)
+    static void _insert(CNode* pNode, CEntry* pEntry) throw(CException)
     {
       // @todo:
       // get destination node by pEntry position
+      // @see getNode(vec3)
       // if node == this/pNode
       //   insert here/pNode/parent/this
       // else
@@ -356,7 +384,10 @@ namespace tree
       mRoot->insert(pEntry);
     }
   
-    
+    void update()
+    {
+      mRoot->update();
+    }
   };
 
   class CResult
@@ -387,6 +418,12 @@ namespace tree
       GREATER
     };
 
+    enum EOrder
+    {
+      ASC,
+      DESC
+    };
+    
     protected:
     CResult mResult;
     
@@ -418,6 +455,11 @@ namespace tree
     }
     
     CQuery& where(EField field, EComp comp, const math::CFrustum& frustum)
+    {
+      return *this;
+    }
+    
+    CQuery& order()
     {
       return *this;
     }

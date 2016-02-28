@@ -16,7 +16,7 @@ namespace math
 }
 
 #include "math/CVector.hpp"  // 
-#include "math/CMatrix.hpp"  // 
+#include "math/CMatrix.hpp"  //
 
 namespace math
 {
