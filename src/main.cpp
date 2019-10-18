@@ -1,5 +1,7 @@
 #include "../inc/math.hpp" // <math.hpp>
 #include "../inc/tree.hpp" // <tree.hpp>
+#include <iostream>
+#include <ostream>
 
 int main()
 {
@@ -10,6 +12,9 @@ int main()
   // sdasd
 
   tree::COcTree* pOcTree = new tree::COcTree;
+
+  std::cout << "test from gitpod.io" << std::endl;
+
 
   try
   {
