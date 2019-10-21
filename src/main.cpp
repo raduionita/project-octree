@@ -15,7 +15,6 @@ int main()
 
   std::cout << "test from gitpod.io" << std::endl;
 
-
   try
   {
     pOcTree->insert(pEntry0);
@@ -28,6 +27,7 @@ int main()
   }
 
   pOcTree->update();
+  const auto& pRoot = pOcTree->getRoot();
 
   delete pOcTree;
   delete pEntry0;
